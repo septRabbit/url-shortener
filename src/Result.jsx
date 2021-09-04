@@ -10,8 +10,14 @@ function clsx(...className) {
 function Result() {
   let location = useLocation();
   const history = useHistory();
-  const shortURL = location.state?.data.url;
-  console.log(shortURL);
+  const shortURL = location.state.data?.url;
+
+  let myInput = null;
+  const copyToClipboard = () => {
+    myInput.select();
+    document.execCommand("copy");
+    alert("Copied BurgerURL : " + myInput.value);
+  };
 
   return (
     <div className="min-h-screen">
@@ -28,12 +34,28 @@ function Result() {
           <p className="text-base"> Easy Link Shortening</p>
         </section>
 
-        <div className="space-y-16 flex flex-col justify-center items-center md:mx-1">
+        <div className="space-y-10 flex flex-col justify-center items-center md:mx-1">
+          <div className="flex flex-row items-center">
+            <input
+              readOnly
+              className="border border-blue-400 w-80 px-3 py-2 rounded-lg text-gray-600 bg-white"
+              value={shortURL}
+              ref={(ref) => (myInput = ref)}
+            />
+
+            <button
+              onClick={copyToClipboard}
+              className="ml-2 bg-white py-1.5 px-3 rounded-lg"
+            >
+              <i className="far fa-copy text-xl text-gray-700"></i>
+            </button>
+          </div>
+
           <QRCode
             bgColor="#FFFFFF"
             fgColor="#000000"
             level="Q"
-            style={{ width: 200 }}
+            style={{ width: 220 }}
             value={shortURL}
           />
           <button

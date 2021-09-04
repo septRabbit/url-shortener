@@ -18,15 +18,13 @@ function Home() {
         <section className="text-white my-auto text-center lg:text-left space-y-8 lg:space-y-8">
           <h1 className="text-2xl lg:text-4xl font-bold">Best URL Shortener</h1>
 
-          <p className="text-base"> Easy Link Shortening</p>
+          <p className="text-lg fonot-semibold"> Easy Link Shortening</p>
         </section>
 
         <div className="space-y-10">
-          <Card className="bg-blue">
-            <p className="text-white text-center px-12">
-              <b>Try It for Free!!</b>
-            </p>
-          </Card>
+          <p className="text-white text-center font-semibold text-2xl px-12">
+            Try It for Free!!
+          </p>
 
           <Card className="bg-white">
             <Form />
