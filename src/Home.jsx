@@ -26,7 +26,7 @@ function Home() {
             Try It for Free!!
           </p>
 
-          <Card className="bg-white">
+          <Card>
             <Form />
           </Card>
         </div>

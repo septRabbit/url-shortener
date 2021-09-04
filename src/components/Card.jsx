@@ -6,7 +6,7 @@ function Card({ children, className }) {
   }
 
   return (
-    <div className={clsx("p-4 rounded-lg bg-blue-500 shadow-lg", className)}>
+    <div className={clsx("p-4 rounded-lg bg-white shadow-lg", className)}>
       {children}
     </div>
   );
