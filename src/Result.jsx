@@ -10,7 +10,7 @@ function clsx(...className) {
 function Result() {
   let location = useLocation();
   const history = useHistory();
-  const shortURL = location.state.data?.url;
+  const shortURL = location.state.data?.short;
 
   let myInput = null;
   const copyToClipboard = () => {

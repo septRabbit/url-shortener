@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 function clsx(...className) {
   return className.filter(Boolean).join(" ");
@@ -68,7 +69,7 @@ function Form() {
   const history = useHistory();
 
   const [field, setField] = useState({
-    id: "url",
+    id: "originalURL",
     label: "Enter the long URL",
     error: false,
     errorMsg: "URL cannot be empty",
@@ -80,13 +81,50 @@ function Form() {
     const form = new FormData(event.target);
     const data = Object.fromEntries(form.entries());
 
-    if (data.url.length === 0) {
+    if (data.originalURL.length === 0) {
       setField((field) => ({
         ...field,
         error: true,
       }));
     } else {
-      history.push("/result", { data: data });
+      // Send Post request to backend
+      try {
+        const response = await axios("http://localhost:5000/api/short", {
+          headers: { "content-type": "application/json" },
+          method: "POST",
+          data: data.originalURL,
+        });
+
+        if (response.status === 200 || response.status === 201) {
+          try {
+            const shortResponse = await axios(
+              "http://localhost:5000/api/short/:hash",
+              {
+                headers: { "content-type": "application/json" },
+                method: "GET",
+              }
+            );
+            if (response.status === 200 || response.status === 201) {
+              let short = response.data.data.shortUrl;
+              history.push("/result", { data: short });
+            }
+          } catch (error) {
+            if (error.response) {
+              console.log(error.response.data);
+            } else {
+              console.log("Error", error.message);
+            }
+            console.log(error);
+          }
+        }
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.data);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error);
+      }
     }
   }
 
