@@ -52,6 +52,7 @@ function Result() {
           </div>
 
           <QRCode
+            className="border-2 border-white p-2 rounded-md"
             bgColor="#FFFFFF"
             fgColor="#000000"
             level="Q"
