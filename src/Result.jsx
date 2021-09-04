@@ -21,7 +21,7 @@ function Result() {
 
   return (
     <div className="min-h-screen">
-      <h1 className="text-center pb-20 md:text-left md:pl-20 pt-20 md:pt-10 text-2.5xl text-white lg:text-5xl font-bold">
+      <h1 className="text-center pb-12 md:text-left md:pl-20 pt-16 text-2.5xl text-white lg:text-5xl font-bold">
         BugerURL
       </h1>
 
@@ -34,7 +34,7 @@ function Result() {
           <p className="text-base"> Easy Link Shortening</p>
         </section>
 
-        <div className="space-y-10 flex flex-col justify-center items-center md:mx-1">
+        <div className="space-y-8 flex flex-col justify-center items-center md:mx-1">
           <div className="flex flex-row items-center">
             <input
               readOnly
