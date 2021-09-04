@@ -75,7 +75,7 @@ function Form() {
     errorMsg: "URL cannot be empty",
   });
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
 
     const form = new FormData(event.target);
