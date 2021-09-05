@@ -25,7 +25,6 @@ function Result() {
           <h1 className="text-2xl lg:text-4xl font-bold">
             Best URL Shortening WebApp
           </h1>
-
           <p className="text-base"> Easy Link Shortening</p>
         </section>
 
