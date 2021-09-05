@@ -20,21 +20,15 @@ function Result() {
   };
 
   return (
-    <div className="min-h-screen">
-      <h1 className="text-center pb-12 md:text-left md:pl-20 pt-16 text-2.5xl text-white lg:text-5xl font-bold">
-        BugerURL
-      </h1>
-
-      <div className="px-6 md:px-20 grid lg:grid-cols-2 place-content-center gap-10 md:gap-20 max-w-screen-xl mx-auto">
-        <section className="text-white my-auto text-center lg:text-left space-y-8 lg:space-y-8">
+      <main className="px-6 md:px-20 grid lg:grid-cols-2 place-content-center gap-10 md:gap-20 max-w-screen-xl mx-auto">
+        <section className="text-blue-500 my-auto text-center lg:text-left space-y-8 lg:space-y-8">
           <h1 className="text-2xl lg:text-4xl font-bold">
             Best URL Shortening WebApp
           </h1>
-
           <p className="text-base"> Easy Link Shortening</p>
         </section>
 
-        <div className="space-y-8 flex flex-col justify-center items-center md:mx-1">
+        <section className="space-y-8 flex flex-col justify-center items-center md:mx-1">
           <div className="flex flex-row items-center">
             <input
               readOnly
@@ -52,7 +46,7 @@ function Result() {
           </div>
 
           <QRCode
-            className="border-2 border-white p-2 rounded-md"
+            className="border-2 border-blue-300 p-2 rounded-md"
             bgColor="#FFFFFF"
             fgColor="#000000"
             level="Q"
@@ -61,13 +55,13 @@ function Result() {
           />
           <button
             onClick={() => history.push("/")}
-            className="border-2 border-white text-white p-2 rounded-xl"
+            className="border-2 border-blue-400 text-blue-400 p-2 rounded-xl"
           >
             Shorten a new URL
           </button>
-        </div>
-      </div>
-    </div>
+        </section>
+      </main>
+
   );
 }
 
