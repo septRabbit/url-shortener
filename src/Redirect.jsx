@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
+import axios from "axios";
 
 function Redirect() {
   let { hash } = useParams();
-
-  useEffect(async (hash) => {
+  useEffect(async () => {
     try {
-      //   const response = await axios(`http://localhost:5000/api/short/${hash}`, {
-      //     headers: { "content-type": "application/json" },
-      //     method: "GET",
-      //   });
-
-      //   if (response.status === 200) {
-      //   let originalURL = response.data.data.originalUrl;
-      window.location.href = "https://google.com";
-      //   }
+          const response = await axios(`http://localhost:5000/api/short/${hash}`, {
+        headers: { "content-type": "application/json" },
+        method: "GET",
+      });
+      console.log(response);
+      if (response.status === 200) {
+        let originalURL = response.data.url;
+        window.location.href = originalURL;
+      }
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
