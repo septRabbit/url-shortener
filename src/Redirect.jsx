@@ -6,15 +6,15 @@ function Redirect() {
 
   useEffect(async (hash) => {
     try {
-      const response = await axios(`http://localhost:5000/api/short/${hash}`, {
-        headers: { "content-type": "application/json" },
-        method: "GET",
-      });
+      //   const response = await axios(`http://localhost:5000/api/short/${hash}`, {
+      //     headers: { "content-type": "application/json" },
+      //     method: "GET",
+      //   });
 
-      if (response.status === 200) {
-        let originalURL = response.data.data.originalUrl;
-        window.location.href = originalURL;
-      }
+      //   if (response.status === 200) {
+      //   let originalURL = response.data.data.originalUrl;
+      window.location.href = "https://google.com";
+      //   }
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
@@ -25,7 +25,9 @@ function Redirect() {
     }
   }, []);
 
-  return <div>Redirect</div>;
+  return (
+    <div className="text-center text-white text-2xl pt-28">Redirecting...</div>
+  );
 }
 
 export default Redirect;

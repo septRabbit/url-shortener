@@ -13,7 +13,7 @@ function App() {
       <Route path="/result">
         <Result />
       </Route>
-      <Route path="/redirect/:hash">
+      <Route path="/:hash">
         <Redirect />
       </Route>
     </Switch>
