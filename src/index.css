@@ -11,7 +11,7 @@ body,
 }
 
 body {
-  @apply bg-blue-400;
+  @apply bg-blue-200;
 }
 
 input {

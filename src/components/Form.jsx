@@ -8,7 +8,7 @@ function clsx(...className) {
 
 function Button({ children, className }) {
   return (
-    <button className={clsx("p-2 rounded shadow-lg w-full", className)}>
+    <button className={clsx("p-2 rounded shadow-solid w-full active:shadow-none active:bg-green-700 hover:bg-green-600 transform-colors duration-500", className)}>
       {children}
     </button>
   );
@@ -89,7 +89,7 @@ function Form() {
     } else {
       // Send Post request to backend
       try {
-        const response = await axios("http://localhost:5000/api/short", {
+        const response = await axios("http://20.89.157.220:5000/api/short", {
           headers: { "content-type": "application/json" },
           method: "POST",
           data: { url: data.originalURL },

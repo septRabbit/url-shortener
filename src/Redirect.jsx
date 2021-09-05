@@ -6,7 +6,7 @@ function Redirect() {
   let { hash } = useParams();
   useEffect(async () => {
     try {
-          const response = await axios(`http://localhost:5000/api/short/${hash}`, {
+          const response = await axios(`http://20.89.157.220:5000/api/short/${hash}`, {
         headers: { "content-type": "application/json" },
         method: "GET",
       });
