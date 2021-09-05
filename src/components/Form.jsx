@@ -92,11 +92,11 @@ function Form() {
         const response = await axios("http://localhost:5000/api/short", {
           headers: { "content-type": "application/json" },
           method: "POST",
-          data: data.originalURL,
+          data: { url: data.originalURL },
         });
 
         if (response.status === 200) {
-          let short = response.data.data.shortUrl;
+          let short = response.data .shortUrl;
           history.push("/result", { data: short });
         }
       } catch (error) {
