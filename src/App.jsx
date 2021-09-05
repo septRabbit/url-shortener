@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Result from "./Result";
+import Redirect from "./Redirect";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
       </Route>
       <Route path="/result">
         <Result />
+      </Route>
+      <Route path="/redirect/:hash">
+        <Redirect />
       </Route>
     </Switch>
   );

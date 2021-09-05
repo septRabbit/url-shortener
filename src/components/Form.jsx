@@ -95,27 +95,9 @@ function Form() {
           data: data.originalURL,
         });
 
-        if (response.status === 200 || response.status === 201) {
-          try {
-            const shortResponse = await axios(
-              "http://localhost:5000/api/short/:hash",
-              {
-                headers: { "content-type": "application/json" },
-                method: "GET",
-              }
-            );
-            if (response.status === 200 || response.status === 201) {
-              let short = response.data.data.shortUrl;
-              history.push("/result", { data: short });
-            }
-          } catch (error) {
-            if (error.response) {
-              console.log(error.response.data);
-            } else {
-              console.log("Error", error.message);
-            }
-            console.log(error);
-          }
+        if (response.status === 200) {
+          let short = response.data.data.shortUrl;
+          history.push("/result", { data: short });
         }
       } catch (error) {
         if (error.response) {
