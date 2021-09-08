@@ -16,5 +16,6 @@ module.exports = {
     'react/prop-types': 'off',
     'no-console': 'off',
     'no-shadow': 'off',
+    'jsx-quotes': ['error', 'prefer-single'],
   },
 };
