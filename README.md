@@ -24,6 +24,12 @@ with yarn:
 yarn dev
 ```
 
+## Develop with docker
+```bash
+docker build -t short_url -f ./docker/dockerfile .  docker build -t short_url -f ./docker/dockerfile .
+docker run -p 3000:3000 short_url
+```
+
 ---
 ## Build
 with npm:
