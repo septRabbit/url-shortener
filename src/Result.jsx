@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { QRCode } from 'react-qr-svg';
 import Toast from './components/Toast';
 
-function clsx(...className) {
-  return className.filter(Boolean).join(' ');
-}
-
 function Result() {
-  let location = useLocation();
+  const location = useLocation();
   const history = useHistory();
   const shortURL = `${window.location.origin}/${location.state.data}`;
 
@@ -17,7 +13,7 @@ function Result() {
   const copyToClipboard = () => {
     myInput.select();
     document.execCommand('copy');
-    alert('Copied BurgerURL : ' + myInput.value);
+    alert(`Copied miuURL : ${myInput.value}`);
   };
 
   return (
@@ -37,14 +33,17 @@ function Result() {
               readOnly
               className="border border-blue-400 w-80 px-3 py-2 rounded-lg text-gray-600 bg-white"
               value={shortURL}
-              ref={(ref) => (myInput = ref)}
+              ref={(ref) => {
+                myInput = ref;
+              }}
             />
 
             <button
               onClick={copyToClipboard}
               className="ml-2 bg-white py-1.5 px-3 rounded-lg"
+              type="button"
             >
-              <i className="far fa-copy text-xl text-gray-700"></i>
+              <i className="far fa-copy text-xl text-gray-700" />
             </button>
           </div>
 
@@ -58,6 +57,7 @@ function Result() {
           />
           <button
             onClick={() => history.push('/')}
+            type="button"
             className="border-2 border-blue-400 text-blue-400 p-2 rounded-xl"
           >
             Shorten a new URL

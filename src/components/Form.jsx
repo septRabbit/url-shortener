@@ -9,9 +9,11 @@ function clsx(...className) {
 function Button({ children, className }) {
   return (
     <button
+      aria-label="button"
+      type="button"
       className={clsx(
-        ' rounded  w-full transform-colors duration-500',
-        className
+        'rounded w-full transform-colors duration-500',
+        className,
       )}
     >
       {children}
@@ -19,7 +21,9 @@ function Button({ children, className }) {
   );
 }
 
-function Input({ id, label, type = 'text', error }) {
+function Input({
+  id, label, type = 'text', error,
+}) {
   const [_value, setValue] = useState('');
 
   return (
@@ -27,11 +31,7 @@ function Input({ id, label, type = 'text', error }) {
       <div className="relative flex flex-col justify-start items-center">
         <label
           htmlFor={id}
-          className={clsx(
-            'w-full p-2 my-4',
-            'flex items-center',
-            'text-base font-semibold text-gray-700'
-          )}
+          className="w-full p-2 my-4 flex items-center text-base font-semibold text-gray-700"
         >
           {label}
         </label>
@@ -41,7 +41,7 @@ function Input({ id, label, type = 'text', error }) {
           name={id}
           className={clsx(
             'w-full p-2 px-3 rounded peer',
-            !error ? 'border' : 'border-2 border-red'
+            !error ? 'border' : 'border-2 border-red',
           )}
           value={_value}
           onChange={(e) => setValue(e.target.value)}
@@ -86,20 +86,16 @@ function Form() {
     const form = new FormData(event.target);
     const data = Object.fromEntries(form.entries());
 
-    let sendData = { url: data.originalURL }
-    //expirAt
-    const date = (new Date(+new Date() + 8 * 3600 * 1000)).getTime();
+    const sendData = { url: data.originalURL };
+    // expirAt
+    const date = new Date(+new Date() + 8 * 3600 * 1000).getTime();
 
-
-    let calTime = 0
-    if(data.liveTime !== "none") {
-
-      calTime = date + (data.liveTime * 60 * 1000);
-      const totalDate = (new Date(calTime)).toISOString();
+    let calTime = 0;
+    if (data.liveTime !== 'none') {
+      calTime = date + data.liveTime * 60 * 1000;
+      const totalDate = new Date(calTime).toISOString();
       sendData.expireAt = totalDate;
     }
-
-   
 
     if (data.originalURL.length === 0) {
       setField((field) => ({
@@ -116,22 +112,22 @@ function Form() {
         });
 
         if (response.status === 200) {
-          let short = response.data.shortUrl;
+          const short = response.data.shortUrl;
           history.push('/result', { data: short });
         }
       } catch (error) {
         if (error.response) {
-          console.log(error.response.data);
+          console.log('Error: ', error.response.data);
         } else {
-          console.log('Error', error.message);
+          console.log('Error: ', error.message);
         }
-        console.log(error);
+        console.log('Error: ', error);
       }
     }
   }
 
   return (
-    <form className="space-y-8 lg:p-6 bg-white" onSubmit={onSubmit}>
+    <form className="space-y-8 lg:p-6 bg-white rounded-lg shadow-lg p-4" onSubmit={onSubmit}>
       <Input
         type="url"
         id={field.id}
@@ -140,30 +136,32 @@ function Form() {
       />
 
       <div className="flex justify-between items-center">
-        <label>Url live time:</label>
-
-        <select
-          className="flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600"
-          name="liveTime"
-          id="liveTime"
-        >
-          <option value="none">None</option>
-          <option value="30">30 min</option>
-          <option value="60">1 hr</option>
-          <option value="240">4 hr</option>
-          <option value="480">8 hr</option>
-          <option value="3600">1 day</option>
-          <option value="25200">7 days</option>
-        </select>
+        <label htmlFor="Url-live-time">
+          Url Live Time:
+          <select
+            className="flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600"
+            name="liveTime"
+            id="liveTime"
+          >
+            <option value="none">None</option>
+            <option value="30">30 min</option>
+            <option value="60">1 hr</option>
+            <option value="240">4 hrs</option>
+            <option value="480">8 hrs</option>
+            <option value="3600">1 day</option>
+            <option value="25200">7 days</option>
+          </select>
+        </label>
       </div>
 
       <Button className="p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600">
-        Make BurgerURL
+        Make miuURL
       </Button>
 
       <p className="text-xs text-blue-grayish text-center px-4">
-        By clicking the button, you are agreeing to our{' '}
-        <a href="#" className="text-red font-bold">
+        By clicking the button, you are agreeing to our
+        {' '}
+        <a href="/" className="text-red font-bold">
           Terms and Services and Use of Cookies.
         </a>
       </p>

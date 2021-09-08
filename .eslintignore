@@ -2,3 +2,7 @@ node_modules
 .vscode
 docker
 **/*.config.js
+
+images
+powered-by-vitawind-dark.png
+index.css
