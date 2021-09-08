@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function clsx(...className) {
-  return className.filter(Boolean).join(" ");
+  return className.filter(Boolean).join(' ');
 }
 
 function Button({ children, className }) {
   return (
-    <button className={clsx("p-2 rounded shadow-solid w-full active:shadow-none active:bg-green-700 hover:bg-green-600 transform-colors duration-500", className)}>
+    <button
+      className={clsx(
+        ' rounded  w-full transform-colors duration-500',
+        className
+      )}
+    >
       {children}
     </button>
   );
 }
 
-function Input({ id, label, type = "text", error }) {
-  const [_value, setValue] = useState("");
+function Input({ id, label, type = 'text', error }) {
+  const [_value, setValue] = useState('');
 
   return (
     <div>
@@ -23,9 +28,9 @@ function Input({ id, label, type = "text", error }) {
         <label
           htmlFor={id}
           className={clsx(
-            "w-full p-2 my-4",
-            "flex items-center",
-            "text-base font-semibold text-gray-700"
+            'w-full p-2 my-4',
+            'flex items-center',
+            'text-base font-semibold text-gray-700'
           )}
         >
           {label}
@@ -35,8 +40,8 @@ function Input({ id, label, type = "text", error }) {
           id={id}
           name={id}
           className={clsx(
-            "w-full p-2 px-3 rounded peer",
-            !error ? "border" : "border-2 border-red"
+            'w-full p-2 px-3 rounded peer',
+            !error ? 'border' : 'border-2 border-red'
           )}
           value={_value}
           onChange={(e) => setValue(e.target.value)}
@@ -69,10 +74,10 @@ function Form() {
   const history = useHistory();
 
   const [field, setField] = useState({
-    id: "originalURL",
-    label: "Enter the long URL",
+    id: 'originalURL',
+    label: 'Enter the long URL',
     error: false,
-    errorMsg: "URL cannot be empty",
+    errorMsg: 'URL cannot be empty',
   });
 
   async function onSubmit(event) {
@@ -80,6 +85,21 @@ function Form() {
 
     const form = new FormData(event.target);
     const data = Object.fromEntries(form.entries());
+
+    let sendData = { url: data.originalURL }
+    //expirAt
+    const date = (new Date(+new Date() + 8 * 3600 * 1000)).getTime();
+
+
+    let calTime = 0
+    if(data.liveTime !== "none") {
+
+      calTime = date + (data.liveTime * 60 * 1000);
+      const totalDate = (new Date(calTime)).toISOString();
+      sendData.expireAt = totalDate;
+    }
+
+   
 
     if (data.originalURL.length === 0) {
       setField((field) => ({
@@ -89,21 +109,21 @@ function Form() {
     } else {
       // Send Post request to backend
       try {
-        const response = await axios("http://20.89.157.220:5000/api/short", {
-          headers: { "content-type": "application/json" },
-          method: "POST",
-          data: { url: data.originalURL },
+        const response = await axios('http://20.89.157.220:5000/api/short', {
+          headers: { 'content-type': 'application/json' },
+          method: 'POST',
+          data: sendData,
         });
 
         if (response.status === 200) {
-          let short = response.data .shortUrl;
-          history.push("/result", { data: short });
+          let short = response.data.shortUrl;
+          history.push('/result', { data: short });
         }
       } catch (error) {
         if (error.response) {
           console.log(error.response.data);
         } else {
-          console.log("Error", error.message);
+          console.log('Error', error.message);
         }
         console.log(error);
       }
@@ -119,10 +139,30 @@ function Form() {
         error={field.error && field.errorMsg}
       />
 
-      <Button className="bg-green text-white">Make BurgerURL</Button>
+      <div className="flex justify-between items-center">
+        <label>Url live time:</label>
+
+        <select
+          className="flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600"
+          name="liveTime"
+          id="liveTime"
+        >
+          <option value="none">None</option>
+          <option value="30">30 min</option>
+          <option value="60">1 hr</option>
+          <option value="240">4 hr</option>
+          <option value="480">8 hr</option>
+          <option value="3600">1 day</option>
+          <option value="25200">7 days</option>
+        </select>
+      </div>
+
+      <Button className="p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600">
+        Make BurgerURL
+      </Button>
 
       <p className="text-xs text-blue-grayish text-center px-4">
-        By clicking the button, you are agreeing to our{" "}
+        By clicking the button, you are agreeing to our{' '}
         <a href="#" className="text-red font-bold">
           Terms and Services and Use of Cookies.
         </a>
