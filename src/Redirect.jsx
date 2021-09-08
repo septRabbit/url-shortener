@@ -29,9 +29,9 @@ function Redirect() {
   }, []);
 
   return (
-    <div className="text-center text-white text-2xl pt-28 my-10">
-      <h1>Redirecting...</h1>
-      <img src="/src/images" alt="redirecting" />
+    <div className='flex flex-col text-center justify-center items-cemter pt-20'>
+      <h1 className='my-10 ml-10 text-white text-4xl'>Redirecting...</h1>
+      <img className='w-60 mx-auto' src='/src/powered-by-vitawind-dark.png' alt='redirecting' />
     </div>
   );
 }

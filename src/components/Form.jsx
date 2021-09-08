@@ -9,8 +9,8 @@ function clsx(...className) {
 function Button({ children, className }) {
   return (
     <button
-      aria-label="button"
-      type="button"
+      aria-label='button'
+      type='submit'
       className={clsx(
         'rounded w-full transform-colors duration-500',
         className,
@@ -28,10 +28,10 @@ function Input({
 
   return (
     <div>
-      <div className="relative flex flex-col justify-start items-center">
+      <div className='relative flex flex-col justify-start items-center'>
         <label
           htmlFor={id}
-          className="w-full p-2 my-4 flex items-center text-base font-semibold text-gray-700"
+          className='w-full p-2 my-4 flex items-center text-base font-semibold text-gray-700'
         >
           {label}
         </label>
@@ -49,21 +49,21 @@ function Input({
 
         {error && (
           <svg
-            className="absolute top-12 -right-8 p-9 h-full text-red"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            className='absolute top-12 -right-8 p-9 h-full text-red'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
           >
-            <circle cx="6" cy="6" r="5" fill="currentColor" />
-            <rect x="5" y="3" width="2" height="4.5" rx="1" fill="white" />
-            <rect x="5" y="8.5" width="2" height="2" rx="1" fill="white" />
+            <circle cx='6' cy='6' r='5' fill='currentColor' />
+            <rect x='5' y='3' width='2' height='4.5' rx='1' fill='white' />
+            <rect x='5' y='8.5' width='2' height='2' rx='1' fill='white' />
           </svg>
         )}
       </div>
 
       {error && (
-        <div className="flex justify-end mt-1">
-          <strong className="text-xs text-red">{error}</strong>
+        <div className='flex justify-end mt-1'>
+          <strong className='text-xs text-red'>{error}</strong>
         </div>
       )}
     </div>
@@ -127,41 +127,41 @@ function Form() {
   }
 
   return (
-    <form className="space-y-8 lg:p-6 bg-white rounded-lg shadow-lg p-4" onSubmit={onSubmit}>
+    <form className='space-y-8 lg:p-6 bg-white rounded-lg shadow-lg p-4' onSubmit={onSubmit}>
       <Input
-        type="url"
+        type='url'
         id={field.id}
         label={field.label}
         error={field.error && field.errorMsg}
       />
 
-      <div className="flex justify-between items-center">
-        <label htmlFor="Url-live-time">
+      <div className='flex justify-between items-center'>
+        <label htmlFor='Url-live-time'>
           Url Live Time:
           <select
-            className="flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600"
-            name="liveTime"
-            id="liveTime"
+            className='flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600'
+            name='liveTime'
+            id='liveTime'
           >
-            <option value="none">None</option>
-            <option value="30">30 min</option>
-            <option value="60">1 hr</option>
-            <option value="240">4 hrs</option>
-            <option value="480">8 hrs</option>
-            <option value="3600">1 day</option>
-            <option value="25200">7 days</option>
+            <option value='none'>None</option>
+            <option value='30'>30 min</option>
+            <option value='60'>1 hr</option>
+            <option value='240'>4 hrs</option>
+            <option value='480'>8 hrs</option>
+            <option value='3600'>1 day</option>
+            <option value='25200'>7 days</option>
           </select>
         </label>
       </div>
 
-      <Button className="p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600">
+      <Button className='p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600'>
         Make miuURL
       </Button>
 
-      <p className="text-xs text-blue-grayish text-center px-4">
+      <p className='text-xs text-blue-grayish text-center px-4'>
         By clicking the button, you are agreeing to our
         {' '}
-        <a href="/" className="text-red font-bold">
+        <a href='/' className='text-red font-bold'>
           Terms and Services and Use of Cookies.
         </a>
       </p>
