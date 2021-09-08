@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Toast({value}) {
+function Toast({ value }) {
   // const shortURL = `${window.location.origin}/${location.state.data}`;
   return (
     <div className="flex justify-center">
@@ -11,6 +11,5 @@ function Toast({value}) {
     </div>
   );
 }
-
 
 export default Toast;

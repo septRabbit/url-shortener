@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import Form from './components/Form';
-import Card from './components/Card';
-
-function clsx(...className) {
-  return className.filter(Boolean).join(' ');
-}
 
 function Home() {
   return (
@@ -20,10 +14,7 @@ function Home() {
         <p className="text-white text-center font-semibold text-2xl px-12">
           Try It for Free!!
         </p>
-
-        <Card>
-          <Form />
-        </Card>
+        <Form />
       </section>
     </main>
   );
