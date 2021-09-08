@@ -1,0 +1,14 @@
+FROM node:alpine AS build
+
+WORKDIR /app
+COPY / ./
+
+RUN npm install
+CMD ["npm", "run", "dev"]
+
+EXPOSE 3000/tcp
+# FROM nginx:alpine
+
+# COPY --from=build /app/build /var/www
+# COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+# EXPOSE 5000
