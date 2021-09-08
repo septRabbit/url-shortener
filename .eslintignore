@@ -1,4 +1,4 @@
 node_modules
 .vscode
 docker
-**/*.onfig.js
+**/*.config.js
