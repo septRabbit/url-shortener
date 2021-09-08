@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Result from './Result';
 import Redirect from './Redirect';
+import Toast from './components/Toast'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <a href="/" >BugerURL</a>
         </h1>
       </header>
+
       <Switch>
         <Route path="/" exact>
           <Home />

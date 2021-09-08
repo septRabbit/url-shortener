@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router";
-import { useHistory } from "react-router-dom";
-import { QRCode } from "react-qr-svg";
+import React, { useState } from 'react';
+import { useLocation } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { QRCode } from 'react-qr-svg';
+import Toast from './components/Toast';
 
 function clsx(...className) {
-  return className.filter(Boolean).join(" ");
+  return className.filter(Boolean).join(' ');
 }
 
 function Result() {
@@ -15,11 +16,13 @@ function Result() {
   let myInput = null;
   const copyToClipboard = () => {
     myInput.select();
-    document.execCommand("copy");
-    alert("Copied BurgerURL : " + myInput.value);
+    document.execCommand('copy');
+    alert('Copied BurgerURL : ' + myInput.value);
   };
 
   return (
+    <div>
+      <Toast />
       <main className="px-6 md:px-20 grid lg:grid-cols-2 place-content-center gap-10 md:gap-20 max-w-screen-xl mx-auto">
         <section className="text-blue-500 my-auto text-center lg:text-left space-y-8 lg:space-y-8">
           <h1 className="text-2xl lg:text-4xl font-bold">
@@ -54,14 +57,14 @@ function Result() {
             value={shortURL}
           />
           <button
-            onClick={() => history.push("/")}
+            onClick={() => history.push('/')}
             className="border-2 border-blue-400 text-blue-400 p-2 rounded-xl"
           >
             Shorten a new URL
           </button>
         </section>
       </main>
-
+    </div>
   );
 }
 
