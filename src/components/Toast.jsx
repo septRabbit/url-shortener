@@ -1,15 +1,67 @@
-import React from 'react';
+import React, {
+  createContext, useCallback, useState, useContext,
+} from 'react';
+import { createPortal } from 'react-dom';
+import clsx from 'clsx';
+import { v4 as uuid } from 'uuid';
+import { Icon } from './Icon';
 
-function Toast({ value }) {
-  // const shortURL = `${window.location.origin}/${location.state.data}`;
-  return (
-    <div className='flex justify-center'>
-      <div className='absolute top-2 px-6 py-4 bg-white shadow-md flex flex-col rounded text-gray-700 '>
-        <h4 className='mb-3 text-xl'>Copied MuiUrl:</h4>
-        <p className='text-blue-500'>{value}</p>
-      </div>
-    </div>
+export function Toast({ type }) {
+  return createPortal(
+    <div
+      className={clsx(
+        'relative',
+        'flex items-center gap-4 py-2 px-4 rounded  border-2',
+        'w-full md:w-auto',
+        type === 'success' && 'bg-white border-green text-green',
+      )}
+    >
+      <span className='w-8'>
+        {' '}
+        {type === 'success' && <Icon.Success />}
+      </span>
+      <p>Url is copied!!</p>
+    </div>,
+    document.getElementById('notice'),
   );
 }
 
-export default Toast;
+const Context = createContext(undefined);
+
+export function ToastProvider({ children }) {
+  const [messages, setMessages] = useState([]);
+
+  const setMessage = useCallback(
+    (message) => {
+      if (!message) return;
+
+      console.log(message);
+      const id = uuid();
+
+      setMessages((queue) => [...queue, { id, message }]);
+
+      setTimeout(() => {
+        setMessages((queue) => queue.filter((pair) => pair.id !== id));
+      }, 2000);
+    },
+    [setMessages],
+  );
+
+  return (
+    <Context.Provider value={setMessage}>
+      {children}
+
+      {messages.map(({ id }) => (
+        <Toast type='success' key={id} />
+      ))}
+    </Context.Provider>
+  );
+}
+
+export function useToast() {
+  const context = useContext(Context);
+
+  if (!context) throw new Error('useToast should be use within ToastProvider');
+
+  return context;
+}

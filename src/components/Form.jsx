@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-
-function clsx(...className) {
-  return className.filter(Boolean).join(' ');
-}
+import clsx from 'clsx';
 
 function Button({ children, className }) {
   return (
@@ -70,6 +67,16 @@ function Input({
   );
 }
 
+function Expire(data) {
+  const date = new Date(+new Date() + 8 * 3600 * 1000).getTime();
+  let calculateTime = 0;
+  if (data.liveTime !== 'none') {
+    calculateTime = date + data.liveTime * 60 * 1000;
+    const totalDate = new Date(calculateTime).toISOString();
+    return totalDate;
+  }
+}
+
 function Form() {
   const history = useHistory();
 
@@ -87,14 +94,9 @@ function Form() {
     const data = Object.fromEntries(form.entries());
 
     const sendData = { url: data.originalURL };
-    // expirAt
-    const date = new Date(+new Date() + 8 * 3600 * 1000).getTime();
 
-    let calTime = 0;
     if (data.liveTime !== 'none') {
-      calTime = date + data.liveTime * 60 * 1000;
-      const totalDate = new Date(calTime).toISOString();
-      sendData.expireAt = totalDate;
+      sendData.expireAt = Expire(data);
     }
 
     if (data.originalURL.length === 0) {
@@ -111,6 +113,7 @@ function Form() {
           data: sendData,
         });
 
+        console.log(sendData);
         if (response.status === 200) {
           const short = response.data.shortUrl;
           history.push('/result', { data: short });
