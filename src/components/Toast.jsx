@@ -42,7 +42,7 @@ export function ToastProvider({ children }) {
 
       setTimeout(() => {
         setMessages((queue) => queue.filter((pair) => pair.id !== id));
-      }, 20000);
+      }, 2000);
     },
     [setMessages],
   );
