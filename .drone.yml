@@ -29,6 +29,21 @@ steps:
         - cd ~/datadrive/nginx
         - sudo docker-compose -f docker-compose.yml up -d 
 
+  - name: discord notification
+    image: appleboy/drone-discord
+    settings:
+      webhook_id: 
+        from_secret: discord_id
+      webhook_token:
+        from_secret: discord_token
+      message: >
+        {{#success build.status}}
+          Frontend build {{build.number}} succeeded. Good job.
+        {{else}}
+          Frontend build {{build.number}} failed. {{build.author}} Fix me please.
+          {{build.message}}
+        {{/success}}
+
 trigger:
   branch:
     - master
