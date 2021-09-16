@@ -11,7 +11,7 @@ function App() {
     <div className='min-h-screen '>
       <header className='mb-5 bg-blue-400 px-6 shadow-md'>
         <h1 className='text-white mx-auto py-6 text-left md:pl-20 text-2.5xl lg:text-5xl font-bold max-w-screen-xl'>
-          <a href='/'>BugerURL</a>
+          <a href='/'>miuURL</a>
         </h1>
       </header>
 
