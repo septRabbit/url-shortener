@@ -3,6 +3,16 @@ import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { QRCode } from 'react-qr-svg';
 import clsx from 'clsx';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  LineShareButton,
+  FacebookIcon,
+  LineIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
 import { useToast } from './components/Toast';
 
 /* global ClipboardItem */
@@ -68,6 +78,20 @@ function Result() {
             style={{ width: 220 }}
             value={shortURL}
           />
+          <div className='flex flex-row justify-evenly w-4/5 lg:w-3/5'>
+            <FacebookShareButton className='flex items-center' url={shortURL}>
+              <FacebookIcon size={50} round />
+            </FacebookShareButton>
+            <LineShareButton className='flex items-center' url={shortURL}>
+              <LineIcon size={50} round />
+            </LineShareButton>
+            <TwitterShareButton className='flex items-center' url={shortURL}>
+              <TwitterIcon size={50} round />
+            </TwitterShareButton>
+            <WhatsappShareButton className='flex items-center' url={shortURL}>
+              <WhatsappIcon size={50} round />
+            </WhatsappShareButton>
+          </div>
           <button
             type='button'
             onClick={() => history.push('/')}

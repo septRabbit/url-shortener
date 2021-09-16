@@ -16,8 +16,10 @@
     "react-qr-svg": "^2.4.0",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
+    "react-share": "^4.4.0",
     "uuid": "^8.3.2",
-    "vite": "^2.4.4"
+    "vite": "^2.4.4",
+    "vite-plugin-svgr": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -27,7 +29,6 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "vitawind": "^1.2.7",
-    "vite-plugin-svgr": "^0.4.0"
+    "vitawind": "^1.2.7"
   }
 }
