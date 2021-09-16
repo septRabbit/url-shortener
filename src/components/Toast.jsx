@@ -20,7 +20,7 @@ export function Toast({ type }) {
         {' '}
         {type === 'success' && <Icon.Success />}
       </span>
-      <p>Url is copied!!</p>
+      <p>URL is copied!!</p>
     </div>,
     document.getElementById('notice'),
   );

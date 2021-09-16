@@ -27,9 +27,10 @@ function copyToClipboard(text) {
 function Result() {
   const location = useLocation();
   const history = useHistory();
-  const shortURL = `${window.location.origin}/${location.state.data}`;
+  const shortURL = `${window.location.origin}/${location.state?.data}`;
   const setToast = useToast();
   const myInput = useRef(null);
+  console.log(location);
 
   const onClick = () => {
     if (!myInput.current) return;
@@ -38,17 +39,21 @@ function Result() {
     setToast('Copy To Clipboard');
   };
 
+  if (!location.state) {
+    history.push('/');
+  }
+
   return (
     <div>
       <main
         className={clsx(
-          'px-6 md:px-20 grid  max-w-screen-xl mx-auto',
-          'lg:grid-cols-2 place-content-center gap-10 md:gap-20',
+          'px-6 md:px-20 grid max-w-screen-xl mx-auto',
+          'md:grid-cols-2 place-content-center gap-10 md:gap-20',
         )}
       >
         <section
           className={clsx(
-            ' my-auto text-center  space-y-8 lg:space-y-8',
+            'my-auto text-center space-y-8 lg:space-y-8',
             'text-blue-500 lg:text-left',
           )}
         >
