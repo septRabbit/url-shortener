@@ -7,7 +7,7 @@ function Redirect() {
   useEffect(async () => {
     try {
       const response = await axios(
-        `http://20.89.157.220:5000/api/short/${hash}`,
+        `https://miu.services/backend/api/short/${hash}`,
         {
           headers: { 'content-type': 'application/json' },
           method: 'GET',
