@@ -7,7 +7,7 @@ function Home() {
       <section className='text-blue-500 my-auto text-center lg:text-left space-y-8 lg:space-y-8'>
         <h1 className='text-2xl lg:text-4xl font-bold'>Best URL Shortener</h1>
 
-        <p className='text-lg fonot-semibold'> Easy Link Shortening</p>
+        <p className='text-lg fonot-semibold'>Easy Link Shortening</p>
       </section>
 
       <section className='space-y-5'>

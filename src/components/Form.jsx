@@ -140,7 +140,7 @@ function Form() {
 
       <div className='flex justify-between items-center'>
         <label htmlFor='Url-live-time'>
-          Url Live Time:
+          URL Live Time:
           <select
             className='flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600'
             name='liveTime'
@@ -158,7 +158,7 @@ function Form() {
       </div>
 
       <Button className='p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600'>
-        Make miuURL
+        Make μRL
       </Button>
 
       <p className='text-xs text-blue-grayish text-center px-4'>
