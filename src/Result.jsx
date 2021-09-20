@@ -57,8 +57,8 @@ function Result() {
             'text-blue-500 lg:text-left',
           )}
         >
-          <h1 className='text-2xl lg:text-4xl font-bold'>Best URL Shortening WebApp</h1>
-          <p className='text-base'> Easy Link Shortening</p>
+          <h1 className='text-2xl lg:text-4xl font-bold'>Best URL Shortener</h1>
+          <p className='text-base'>Easy Link Shortening</p>
         </section>
 
         <section className='space-y-8 flex flex-col justify-center items-center md:mx-1'>
