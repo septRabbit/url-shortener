@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useHistory } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
 function Redirect() {
   const { hash } = useParams();
+  const history = useHistory();
   useEffect(async () => {
     try {
       const response = await axios(
@@ -17,6 +18,8 @@ function Redirect() {
       if (response.status === 200) {
         const originalURL = response.data.url;
         window.location.href = originalURL;
+      } else {
+        history.push('/404');
       }
     } catch (error) {
       if (error.response) {

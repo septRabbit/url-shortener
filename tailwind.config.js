@@ -30,6 +30,25 @@ module.exports = {
         '2.5xl': ['28px', '36px'],
       },
     },
+    keyframes: {
+      moveDown: {
+        '0%': {
+          transform: 'translateY(-50px)',
+        },
+        '75%': {
+          transform: 'translateY(10px)',
+        },
+        '90%': {
+          transform: 'translateY(-5px)',
+        },
+        '100%': {
+          transform: 'translateY(0)',
+        },
+      }
+    },
+    animation: {
+      moveDown: 'moveDown 0.4s ease-out',
+    }
   },
   variants: {
     extend: {},
