@@ -44,11 +44,11 @@ module.exports = {
         '100%': {
           transform: 'translateY(0)',
         },
-      }
+      },
     },
     animation: {
       moveDown: 'moveDown 0.4s ease-out',
-    }
+    },
   },
   variants: {
     extend: {},

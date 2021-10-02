@@ -1,10 +1,12 @@
-import React, { useEffect, useHistory } from 'react';
-import { useParams } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router';
 import axios from 'axios';
 
 function Redirect() {
   const { hash } = useParams();
   const history = useHistory();
+  const [err, setErr] = useState(false);
+
   useEffect(async () => {
     try {
       const response = await axios(
@@ -14,28 +16,32 @@ function Redirect() {
           method: 'GET',
         },
       );
-
       if (response.status === 200) {
         const originalURL = response.data.url;
         window.location.href = originalURL;
-      } else {
-        history.push('/404');
       }
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data);
-      } else {
-        console.log('Error', error.message);
+        setErr(true);
+        history.push('/404');
       }
-      console.log(error);
     }
   }, []);
 
   return (
-    <div className='flex flex-col text-center justify-center items-cemter pt-20'>
-      <h1 className='my-10 ml-10 text-white text-4xl'>Redirecting...</h1>
-      <img className='w-60 mx-auto' src='/src/powered-by-vitawind-dark.png' alt='redirecting' />
-    </div>
+    <>
+      {!err ? (
+        <div className='flex flex-col text-center justify-center items-cemter pt-12'>
+          <h1 className='my-10 ml-10 text-white text-4xl'>Redirecting...</h1>
+          <img className='w-60 mx-auto' src='/src/powered-by-vitawind-dark.png' alt='redirecting' />
+        </div>
+      ) : (
+        <div className='flex flex-col text-center justify-center items-cemter pt-12'>
+          <h1 className='my-10 mx-auto text-white text-4xl'>404</h1>
+          <button className='mx-auto p-3 my-10 border-white border-2 rounded-xl text-white text-xl' type='button' onClick={() => history.push('/')}>Back to Home</button>
+        </div>
+      )}
+    </>
   );
 }
 
