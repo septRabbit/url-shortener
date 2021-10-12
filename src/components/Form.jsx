@@ -108,6 +108,7 @@ function Form() {
       // Send Post request to backend
       try {
         const response = await axios('https://miu.services/backend/api/short', {
+        // const response = await axios('http://localhost:5000/api/short', {
           headers: { 'content-type': 'application/json' },
           method: 'POST',
           data: sendData,
