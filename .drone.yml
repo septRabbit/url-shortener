@@ -38,10 +38,19 @@ steps:
         from_secret: discord_token
       message: >
         {{#success build.status}}
-          Frontend build {{build.number}} succeeded. Good job.
+          ✅ Build #{{build.number}} of `{{repo.name}}` succeeded.
+          📝 Commit by {{commit.author}} on `{{commit.branch}}`:
+          ```
+          {{commit.message}}
+          ```
+          🌐 {{ build.link }}
         {{else}}
-          Frontend build {{build.number}} failed. {{build.author}} Fix me please.
-          {{build.message}}
+          ❌ Build #{{build.number}} of `{{repo.name}}` failed.
+          📝 Commit by {{commit.author}} on `{{commit.branch}}`:
+          ```
+          {{commit.message}}
+          ```
+          🌐 {{ build.link }}
         {{/success}}
 
 trigger:
