@@ -22,11 +22,11 @@ steps:
       timeout: 60s
       command_timeout: 2m
       script:
-        - cd datadrive/apps/url-shortener
+        - cd ~/app/url-shortener
         - git checkout master
         - git pull origin master
-        - sudo docker build -f docker/dockerfile . -t front_end:latest
-        - cd ~/datadrive/nginx
+        - sudo docker build -f docker/dockerfile . -t frontend:latest
+        - cd ~/nginx
         - sudo docker-compose -f docker-compose.yml up -d 
 
   - name: discord notification
