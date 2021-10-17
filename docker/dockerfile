@@ -4,7 +4,7 @@ WORKDIR /app
 COPY / ./
 
 RUN npm install
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "serve"]
 
 EXPOSE 3000/tcp
 # FROM nginx:alpine
