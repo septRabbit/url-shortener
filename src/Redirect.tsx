@@ -4,28 +4,30 @@ import axios from 'axios';
 import { Icon } from './components/Icon';
 
 function Redirect() {
-  const { hash } = useParams();
-  const history = useHistory();
+  const { hash } = useParams<{ hash: string }>();
+  const history = useHistory<string>();
   const [err, setErr] = useState(false);
 
-  useEffect(async () => {
-    try {
-      const response = await axios(
-        `https://miu.services/backend/api/short/${hash}`,
-        // `http://localhost:5000/api/short/${hash}`,
-        {
-          headers: { 'content-type': 'application/json' },
-          method: 'GET',
-        },
-      );
-      if (response.status === 200) {
-        const originalURL = response.data.url;
-        window.location.href = originalURL;
-      }
-    } catch (error) {
-      if (error.response) {
-        setErr(true);
-        history.push('/404');
+  useEffect(() => {
+    const asyncFunction = async () => {
+      try {
+        const response = await axios(
+          `https://miu.services/backend/api/short/${hash}`,
+          // `http://localhost:5000/api/short/${hash}`,
+          {
+            headers: { 'content-type': 'application/json' },
+            method: 'GET',
+          },
+        );
+        if (response.status === 200) {
+          const originalURL = response.data.url;
+          window.location.href = originalURL;
+        }
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          setErr(true);
+          history.push('/404');
+        }
       }
     }
   }, []);
