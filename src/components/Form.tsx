@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import clsx from 'clsx';
 
-function Button({ children, className }) {
+type ButtonProps = {
+  children?: ReactNode,
+  className: string,
+}
+
+function Button({ children, className }: ButtonProps) {
   return (
     <button
       aria-label='button'
@@ -18,9 +23,16 @@ function Button({ children, className }) {
   );
 }
 
+type InputProps = {
+  id: string,
+  label: string,
+  type: string,
+  error: string | Boolean,
+}
+
 function Input({
   id, label, type = 'text', error,
-}) {
+}: InputProps) {
   const [_value, setValue] = useState('');
 
   return (
@@ -67,7 +79,7 @@ function Input({
   );
 }
 
-function Expire(data) {
+function Expire(data: { liveTime: any }) {
   const date = new Date(+new Date() + 8 * 3600 * 1000).getTime();
   let calculateTime = 0;
   if (data.liveTime !== 'none') {
@@ -87,7 +99,7 @@ function Form() {
     errorMsg: 'URL cannot be empty',
   });
 
-  async function onSubmit(event) {
+  async function onSubmit(event: { preventDefault: () => void; target: HTMLFormElement | undefined; }) {
     event.preventDefault();
 
     const form = new FormData(event.target);
@@ -108,7 +120,7 @@ function Form() {
       // Send Post request to backend
       try {
         const response = await axios('https://miu.services/backend/api/short', {
-        // const response = await axios('http://localhost:5000/api/short', {
+          // const response = await axios('http://localhost:5000/api/short', {
           headers: { 'content-type': 'application/json' },
           method: 'POST',
           data: sendData,
@@ -120,10 +132,10 @@ function Form() {
           history.push('/result', { data: short });
         }
       } catch (error) {
-        if (error.response) {
-          console.log('Error: ', error.response.data);
+        if (axios.isAxiosError(error)) {
+          console.log('Error: ', error);
         } else {
-          console.log('Error: ', error.message);
+          console.log('Error: ', error);
         }
         console.log('Error: ', error);
       }

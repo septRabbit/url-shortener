@@ -6,8 +6,13 @@ import clsx from 'clsx';
 import { v4 as uuid } from 'uuid';
 import { Icon } from './Icon';
 
-export function Toast({ type }) {
-  return createPortal(
+type ToastProps = {
+  type: string
+}
+
+export function Toast({ type }: ToastProps) {
+  const noticeElement: HTMLElement | null = document.getElementById('notice');
+  return noticeElement ? createPortal(
     <div
       className={clsx(
         'relative',
@@ -23,14 +28,18 @@ export function Toast({ type }) {
       </span>
       <p>URL is copied!!</p>
     </div>,
-    document.getElementById('notice'),
-  );
+    noticeElement,
+  ) : null;
 }
 
 const Context = createContext(undefined);
 
-export function ToastProvider({ children }) {
-  const [messages, setMessages] = useState([]);
+type ToastProviderProps = {
+  children: string
+}
+
+export function ToastProvider({ children }: ToastProviderProps) {
+  const [messages, setMessages] = useState<Array<{ id: string, message: string }>>([]);
 
   const setMessage = useCallback(
     (message) => {
