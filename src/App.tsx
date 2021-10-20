@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Footer from './Footer';
@@ -7,7 +7,10 @@ import Redirect from './Redirect';
 import { ToastProvider } from './components/Toast';
 import { Icon } from './components/Icon';
 
-function App() {
+type LayoutProps = {
+  children?: ReactNode;
+}
+function Layout({ children }: LayoutProps) {
   return (
     <div className='flex flex-col justify-between min-h-screen'>
       <header className='px-6 mb-5 bg-blue-400 shadow-md'>
@@ -18,6 +21,14 @@ function App() {
         </h1>
       </header>
 
+      {children}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Layout>
       <Switch>
         <Route path='/' exact>
           <Home />
@@ -32,7 +43,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-    </div>
+    </Layout>
   );
 }
 

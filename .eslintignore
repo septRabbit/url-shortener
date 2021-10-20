@@ -3,6 +3,6 @@ node_modules
 docker
 **/*.config.js
 
-images
+*.css
+*svg
 powered-by-vitawind-dark.png
-index.css
