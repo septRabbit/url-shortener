@@ -4,7 +4,7 @@ import axios from 'axios';
 import clsx from 'clsx';
 
 type ButtonProps = {
-  children?: ReactNode,
+  children: ReactNode,
   className: string,
 }
 
@@ -37,10 +37,10 @@ function Input({
 
   return (
     <div>
-      <div className='relative flex flex-col justify-start items-center'>
+      <div className='relative flex flex-col items-center justify-start'>
         <label
           htmlFor={id}
-          className='w-full p-2 my-4 flex items-center text-base font-semibold text-gray-700'
+          className='flex items-center w-full p-2 my-4 text-base font-semibold text-gray-700'
         >
           {label}
         </label>
@@ -58,7 +58,7 @@ function Input({
 
         {error && (
           <svg
-            className='absolute top-12 -right-8 p-9 h-full text-red'
+            className='absolute h-full top-12 -right-8 p-9 text-red'
             viewBox='0 0 24 24'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -79,11 +79,17 @@ function Input({
   );
 }
 
-function Expire(data: { liveTime: any }) {
+interface FormData {
+  originalURL: string;
+  liveTime: string;
+  expiredAt?: string;
+}
+
+function Expire(data: { liveTime: string }) {
   const date = new Date(+new Date() + 8 * 3600 * 1000).getTime();
   let calculateTime = 0;
   if (data.liveTime !== 'none') {
-    calculateTime = date + data.liveTime * 60 * 1000;
+    calculateTime = date + parseInt(data.liveTime, 10) * 60 * 1000;
     const totalDate = new Date(calculateTime).toISOString();
     return totalDate;
   }
@@ -99,12 +105,10 @@ function Form() {
     errorMsg: 'URL cannot be empty',
   });
 
-  async function onSubmit(event: { preventDefault: () => void; target: HTMLFormElement | undefined; }) {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     const form = new FormData(event.target);
-    const data = Object.fromEntries(form.entries());
-
+    const data:FormData = Object.fromEntries(form.entries());
     const sendData = { url: data.originalURL };
 
     if (data.liveTime !== 'none') {
@@ -140,10 +144,10 @@ function Form() {
         console.log('Error: ', error);
       }
     }
-  }
+  };
 
   return (
-    <form className='space-y-8 lg:p-6 bg-white rounded-lg shadow-lg p-4' onSubmit={onSubmit}>
+    <form className='p-4 space-y-8 bg-white rounded-lg shadow-lg lg:p-6' onSubmit={onSubmit}>
       <Input
         type='url'
         id={field.id}
@@ -151,11 +155,11 @@ function Form() {
         error={field.error && field.errorMsg}
       />
 
-      <div className='flex justify-between items-center'>
+      <div className='flex items-center justify-between'>
         <label htmlFor='Url-live-time'>
           URL Live Time:
           <select
-            className='flex-1 border border-blue-600 rounded ml-4 p-2 text-blue-600'
+            className='flex-1 p-2 ml-4 text-blue-600 border border-blue-600 rounded'
             name='liveTime'
             id='liveTime'
           >
@@ -170,14 +174,14 @@ function Form() {
         </label>
       </div>
 
-      <Button className='p-2 bg-green shadow-solid text-white active:shadow-none active:bg-green-700 hover:bg-green-600'>
+      <Button className='p-2 text-white bg-green shadow-solid active:shadow-none active:bg-green-700 hover:bg-green-600'>
         Make μRL
       </Button>
 
-      <p className='text-xs text-blue-grayish text-center px-4'>
+      <p className='px-4 text-xs text-center text-blue-grayish'>
         By clicking the button, you are agreeing to our
         {' '}
-        <a href='/' className='text-red font-bold'>
+        <a href='/' className='font-bold text-red'>
           Terms and Services and Use of Cookies.
         </a>
       </p>

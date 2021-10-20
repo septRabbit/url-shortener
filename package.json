@@ -4,7 +4,7 @@
     "dev": "eslint src/**/* && vite --host 0.0.0.0 --port 3000",
     "build": "eslint src/**/* && vite build",
     "serve": "eslint src/**/* && vite preview",
-    "lint": "eslint --ext \".js,.jsx,.vue\" --ignore-path .gitignore .",
+    "lint": "eslint --ext \".js,.jsx,.tsx,.vue\" --ignore-path .gitignore .",
     "lint-fix": "npm run lint -- --fix"
   },
   "dependencies": {
@@ -22,15 +22,19 @@
     "vite-plugin-svgr": "^0.4.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/eslint-parser": "^7.15.8",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.9",
     "@types/react": "^17.0.29",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.3.1",
     "@types/uuid": "^8.3.1",
+    "@typescript-eslint/parser": "^5.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.1",
