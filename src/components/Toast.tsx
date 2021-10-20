@@ -1,5 +1,5 @@
 import React, {
-  createContext, useCallback, useState, useContext,
+  createContext, useCallback, useState, useContext, ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
@@ -32,20 +32,26 @@ export function Toast({ type }: ToastProps) {
   ) : null;
 }
 
-const Context = createContext(undefined);
-
-type ToastProviderProps = {
-  children: string
+type Message = {
+  id: string
+  message: string
 }
 
+type SetMessageAction = 
+  (msg: Message[]) => void;
+
+const Context = createContext<SetMessageAction | undefined>(undefined);
+
+type ToastProviderProps = {
+  children: ReactNode
+}
 export function ToastProvider({ children }: ToastProviderProps) {
-  const [messages, setMessages] = useState<Array<{ id: string, message: string }>>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const setMessage = useCallback(
     (message) => {
       if (!message) return;
 
-      console.log(message);
       const id = uuid();
 
       setMessages((queue) => [...queue, { id, message }]);

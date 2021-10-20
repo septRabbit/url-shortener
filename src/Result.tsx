@@ -14,29 +14,35 @@ import {
   WhatsappIcon,
 } from 'react-share';
 import { useToast } from './components/Toast';
+import { v4 as uuid } from 'uuid'
 
 /* global ClipboardItem */
 function copyToClipboard(text: string) {
   const type = 'text/plain';
-  const blob = new Blob([text], { type });
-  const data = [new ClipboardItem({ [type]: blob })];
+
+  async function get(): Promise<string | Blob> {
+    return new Blob([text], { type });
+  }
+
+  const data = [new ClipboardItem({ [type]: get() })];
 
   return navigator.clipboard.write(data);
 }
 
 function Result() {
-  const location = useLocation();
+  const location = useLocation<{ data: string }>();
   const history = useHistory();
-  const shortURL = `${window.location.origin}/${location.state?.data}`;
+  const shortURL = `${window.location.origin}/${location.state.data}`;
   const setToast = useToast();
-  const myInput = useRef(null);
-  console.log(location);
+  const myInput = useRef<HTMLInputElement>(null);
+
 
   const onClick = () => {
     if (!myInput.current) return;
+
     myInput.current.select();
     copyToClipboard(shortURL);
-    setToast('Copy To Clipboard');
+    setToast([{ id: uuid() , message: 'Copy To Clipboard' }]);
   };
 
   if (!location.state) {
